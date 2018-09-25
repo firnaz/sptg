@@ -6,6 +6,7 @@ class PetaController extends Zend_Controller_Action
         $this->view->page_id = "peta";
         parent::init();
     }
+
     public function indexAction()
     {
         $page = $this->getRequest()->getParam("pages");
@@ -13,10 +14,10 @@ class PetaController extends Zend_Controller_Action
         $start = ($page>0)?(($page-1)*$limit):0;
         $m = $this->_helper->Web->getPeta("", $limit, $start);
         $map = array();
-        foreach($m["rows"] as $key=>$val){
+        foreach ($m["rows"] as $key=>$val) {
             $layers = $val["layers"];
             $l = array();
-            foreach($layers as $key1=>$val1){
+            foreach ($layers as $key1=>$val1) {
                 $l[] = array("url"=>$val1["url"],"layer"=>$val1["layer"]);
             }
             $map[] = array(
@@ -30,9 +31,9 @@ class PetaController extends Zend_Controller_Action
         $this->view->pages = $m['pages'];
 
         $children = $this->_helper->Web->getChildren();
-        if(count($children)>0){
+        if (count($children)>0) {
             $children_res = array();
-            foreach($children as $child){
+            foreach ($children as $child) {
                 $children_res[] = array(
                     'title'    => $child["nama_sistem"],
                     'ajaxurl'  => 'agr/'.$this->view->page_id.'/'.$child["id"],
@@ -42,7 +43,8 @@ class PetaController extends Zend_Controller_Action
             }
 
             $conf = Zend_Registry::get('config');
-            $this->view->source_switcher = array_merge(array(
+            $this->view->source_switcher = array_merge(
+                array(
                 array(
                     'title'    => $conf["app_name"],
                     'url'      => $this->view->page_id,
@@ -51,20 +53,23 @@ class PetaController extends Zend_Controller_Action
                 $children_res
             );
         }
-	}
-    public function detailAction(){
+    }
+
+    public function detailAction()
+    {
         $url_segment = $this->getRequest()->getParam("url_segment");
         $m = $this->_helper->Web->getPetaByURLSegment($url_segment);
         $layers = array();
 
-        if($m['layers'])
-        foreach($m['layers'] as $layer){
-            $layers[] = array(
+        if ($m['layers']) {
+            foreach ($m['layers'] as $layer) {
+                $layers[] = array(
                 'title' => $layer['title'],
                 'url'   => $layer['url'],
                 'layer' => $layer['layer'],
                 'srs' => $layer['srs'],
             );
+            }
         }
 
         $this->view->map_data = array(
@@ -79,13 +84,15 @@ class PetaController extends Zend_Controller_Action
         );
         $this->_helper->Web->updatePetaViews($url_segment);
     }
-    public function simpulAction(){
+    
+    public function simpulAction()
+    {
         $id_simpul = $this->getRequest()->getParam("id");
         $children = $this->_helper->Web->getChildren();
-        if(count($children)){
+        if (count($children)) {
             $children_res = array();
-            foreach($children as $child){
-                if($id_simpul==$child["id"]){
+            foreach ($children as $child) {
+                if ($id_simpul==$child["id"]) {
                     $children_active = array(
                         'title'    => $child["nama_sistem"],
                         'ajaxurl'  => 'agr/'.$this->view->page_id.'/'.$child["id"],
@@ -93,7 +100,7 @@ class PetaController extends Zend_Controller_Action
                         'selected' => true
                     );
                     $children_res[] = $children_active;
-                }else{
+                } else {
                     $children_res[] = array(
                         'title'    => $child["nama_sistem"],
                         'ajaxurl'  => 'agr/'.$this->view->page_id.'/'.$child["id"],
@@ -104,7 +111,8 @@ class PetaController extends Zend_Controller_Action
             }
 
             $conf = Zend_Registry::get('config');
-            $this->view->source_switcher = array_merge(array(
+            $this->view->source_switcher = array_merge(
+                array(
                 array(
                     'title'    => $conf["app_name"],
                     'url'      => 'peta',
@@ -112,10 +120,9 @@ class PetaController extends Zend_Controller_Action
                 )),
                 $children_res
             );
-        }else{
+        } else {
             $this->_redirect($this->view->page_id);
         }
         $this->view->children_active = $children_active;
     }
 }
-?>
