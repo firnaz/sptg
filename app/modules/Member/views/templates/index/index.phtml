@@ -1,0 +1,102 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+                <div class="intro padding clearfix">
+                    <header><h2>Hi, {$member_name}!</h2><header>
+                    <div class="content">
+                        <p>Clearinghouse Hidrometeorologi merupakan salah satu simpul Sistem Informasi Hidrologi, Hidrometeorologi dan Hidrogeologi (SIH3). Data dan informasi hidrometeorolgi disajikan dan divisualisasikan dalam bentuk galeri peta.</p>
+                        <p><a href="{$_URL}/member/layer/upload" class="btn primary">Unggah Layer</a> <a href="{$_URL}/member/peta/upload" class="btn primary">Buat Peta</a> <a href="{$_URL}/member/dokumen/upload" class="btn primary">Unggah Dokumen</a></p>
+                    </div>
+                </div>
+
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header"><h3 class="section-title">Layer Terbaru</h3></header>
+                        <div class="panel-content">
+                            <div class="list-layers medium clearfix">
+                                {foreach $layers as $layer}
+                                <article class="item">
+                                    <header class="thumbnail square">
+                                        <img src="{$layer.thumb}">
+                                        <div class="action">
+                                            <div class="btn-group">
+                                                <a href="{$layer.url}">Lihat Layer</a>
+                                                <!-- <a href="#">Unduh</a> -->
+                                                <!-- <a href="#">Jadikan Peta</a> -->
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="content">
+                                        <h3 class="title">
+                                            <a href="{$layer.url}">{$layer.title}</a>
+                                            <span class="fill"></span>
+                                        </h3>
+                                        <div class="author">
+                                            Diunggah oleh: <strong>{$layer.author}</strong>
+                                        </div>
+
+                                    </div>
+                                    <footer class="meta">
+                                        <div class="view">Dilihat: <span class="value">{$layer.view_count}</span> kali</div>
+                                    </footer>
+                                </article>
+                                {foreachelse}
+                                <p>Tidak ada layer.</p>
+                                {/foreach}
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <aside class="secondary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header"><h2 class="section-title">Peta Terbaru</h2></header>
+                        <div class="panel-content">
+                            <div class="list-peta clearfix">
+                                {if $maps}
+                                <article class="item">
+                                    <header class="title">
+                                        <h3>
+                                            <a href="{$latest_map.url}">{$maps.0.title}</a>
+                                        </h3>
+                                        <div class="author">
+                                            Pembuat: <strong>{$maps.0.author}</strong>
+                                        </div>
+                                    </header>
+
+                                    <div class="content">
+                                        <div class="thumbnail">
+                                            <a href="{$maps.0.author}"><img src="{$maps.0.thumb}"></a>
+                                        </div>
+
+                                        <footer class="meta">
+                                            <div class="view">Dilihat: <span class="value">{$maps.0.view_count}</span> kali</div>
+                                        </footer>
+                                    </div>
+                                </article>
+                                {else}
+                                <p>Tidak ada peta.</p>
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <header class="panel-header"><h2 class="section-title">Dokumen Terbaru</h2></header>
+                        <div class="panel-content">
+                            <ul class="list-dokumen">
+                                {foreach $documents as $document}
+                                <li>
+                                    <i class="ion-folder bullet"></i>
+                                    <h3 class="title"><a href="{$document.url}">{$document.title}</a></h3>
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

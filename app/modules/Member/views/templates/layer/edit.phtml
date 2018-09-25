@@ -1,0 +1,50 @@
+{include file="header.phtml"}
+    <div class="main-container">
+        <div class="main clearfix">
+            <div id="zmap" data-edit="true" data-hapus="true" class="exploremap" data-action="{$_URL}/member/layer/edit/{$identifier}">
+                <div class="map-info">
+                    <div class="header">
+                        <a href="#" class="btn-close"><i class="ion-ios7-close-empty"></i></a>
+                    </div>
+                    <div class="content basic-info-form">
+                        <div class="basic-info basic-info-display">
+                            <h1 class="info-title">{$layer.title}</h1>
+                            <div class="info-description">
+                                {$layer.abstract}
+                            </div>
+                            <div class="info-meta">
+                                <div class="author">Pembuat: {$layer.contributor}</div>
+                                <div class="view">Dilihat: <span class="value">{$layer.num_view}</span> kali</div>
+                            </div>
+                        </div>
+                        <div class="basic-info general-form basic-info-edit">
+                            <p>
+                                <label>Judul</label>
+                                <input type="text" id="txt-judul" name="judul" value="{$layer.title}" class="input-text">
+                            </p>
+                            <p>
+                                <label>Abstrak</label>
+                                <textarea name="abstract" id="txt-absctract" class="input-text" rows="5">{$layer.abstract}</textarea>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    {literal}
+                    var singleLayer = {
+                        title : {/literal}'{$layer.title}'{literal},
+                        type  : 'wms',
+                        wms   : {
+                            url        : {/literal}'{$layer.url}'{literal},
+                            params     : {{/literal}'LAYERS': '{$layer.layer}'{literal}}
+                        },
+                        extent : {/literal}{$layer.extent|@json_encode}{literal}
+                    }
+                    {/literal}
+                </script>
+            </div>
+        </div>
+    </div>
+    <!--  //MAIN -->
+
+{include file="footer.phtml"}

@@ -1,0 +1,78 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+
+
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <h2 class="detail-title">{$document.judul}</h2>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <div class="dokumen-deskripsi">
+                                {$document.konten}
+                            </div>
+                            <!-- <div class="dokumen-tautan">
+                                <h3>Tautan Peta:</h3>
+                                <p><a href="#">Rhoncus nunc urna tincidunt egestas elit arcu dolor</a></p>
+                            </div> -->
+                            <table width="100%" cellpadding="0" cellspacing="0" class="data-berkas">
+                                <tr>
+                                    <th>Nama Berkas</th>
+                                    <th>Ukuran</th>
+                                    <th class="action">Unduh</th>
+                                </tr>
+                                {foreach $document.files as $file}
+                                <tr>
+                                    <td>{$file.filename}</td>
+                                    <td>{$file.filesize}</td>
+                                    <td class="action">
+                                        <a href="{$_URL}/{$file.url}"><i class="ion-ios7-download-outline"></i></a>
+                                        {if $document['mode'] == 'edit'}
+                                        <a href="{$_URL}/member/dokumen/detail/{$document.id}/file/delete/{$file.id_file}" title="Hapus"><i class="ion-ios7-trash"></i></a>
+                                        {/if}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </table>
+
+                            {if $document['mode'] == 'edit'}
+                            <form action="{$_URL}/member/dokumen/detail/{$document.id}/file/upload" method="post" class="general-form autoupload" enctype="multipart/form-data">
+                                <p>
+                                    <label>Tambah Berkas</label>
+                                    <input type="file" name="file" accept=".doc, .docx, .xls, .xlsx, .pdf, .ppt, .pptx, .jpg, .png, .tiff, .tif">
+                                </p>
+                            </form>
+                            <div class="dokumen-action">
+                                <a href="{$_URL}/member/dokumen/delete/{$document.id}" class="btn danger">Hapus Dokumen &amp; Berkas</a>
+                                <a href="{$_URL}/member/dokumen/edit/{$document.id}" class="btn success">Edit Dokumen</a>
+                            </div>
+                            {/if}
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="secondary padding clearfix">
+                    <div class="panel">
+                        <div class="panel-content">
+                            <a href="dokumen-upload.html" class="btn primary full">Unggah Dokumen</a>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <header class="panel-header clearfix"><h2 class="section-title">Dokumen Terbaru</h2></header>
+                        <div class="panel-content">
+                            <ul class="list-dokumen">
+                                {foreach $dokumen as $dok}
+                                <li>
+                                    <i class="ion-folder bullet"></i>
+                                    <h3 class="title"><a href="{$dok.url}">{$dok.title}</a></h3>
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

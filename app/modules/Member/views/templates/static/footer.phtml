@@ -1,0 +1,29 @@
+        <div class="footer-container">
+            <footer class="padding">
+                <p>Copyright 2014 <br>All rights reserved.</p>
+            </footer>
+        </div>
+        <!--  //FOOTER -->
+        <script type="text/javascript">
+            var _baseURL = '{$_URL}';
+            var _listWMS =  [];
+            {if listWMS}
+            _listWMS = {$listWMS|@json_encode}
+            {/if}
+        </script>
+        <!--  Components JS -->
+        <script src="{$_URL}/assets/components/jquery/dist/jquery.min.js"></script>
+        <script src="{$_URL}/assets/components/jquery-ui/jquery-ui.min.js"></script>
+        <script src="{$_URL}/assets/components/openlayers3/build/ol.js"></script>
+        <script src="{$_URL}/assets/components/handlebars/handlebars.min.js"></script>
+
+        <!--  Customs JS -->
+        <script src="{$_URL}/assets/js/templates.js"></script>
+        <script src="{$_URL}/assets/js/main.js"></script>
+        <script src="{$_URL}/assets/js/petaBaseLayer.js"></script>
+        <script src="{$_URL}/assets/js/petaMeasure.js"></script>
+        <script src="{$_URL}/assets/js/peta.js"></script>
+        <script src="{$_URL}/assets/js/peta.v2.js"></script>
+
+    </body>
+</html>

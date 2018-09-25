@@ -1,0 +1,127 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <div class="sort dropdown">
+                                {if $filter_sort == 'terbaru'}
+                                <a href="javascript:void(0)" class="current"><span class="value">Terbaru</span> <i class="ion-ios7-arrow-down"></i></a>
+                                {elseif $filter_sort == 'terpopuler'}
+                                <a href="javascript:void(0)" class="current"><span class="value">Terpopuler</span> <i class="ion-ios7-arrow-down"></i></a>
+                                {elseif $filter_sort == 'terpilih'}
+                                <a href="javascript:void(0)" class="current"><span class="value">Terpilih</span> <i class="ion-ios7-arrow-down"></i></a>
+                                {/if }
+                                <ul class="selection">
+                                    <li{if $filter_sort == 'terbaru'} class="selected"{/if}><a href="{$_URL}/member/layer?filter_sort=terbaru&amp;filter_author={$filter_author}&amp;{$complete_filter}">Terbaru</a></li>
+                                    <li{if $filter_sort == 'terpopuler'} class="selected"{/if}><a href="{$_URL}/member/layer?filter_sort=terpopuler&amp;filter_author={$filter_author}&amp;{$complete_filter}">Terpopuler</a></li>
+                                    <!-- <li{if $filter_sort == 'terpilih'} class="selected"{/if}><a href="{$_URL}/member/layer?filter_sort=terpilih&amp;filter_author={$filter_author}&amp;{$complete_filter}">Terpilih</a></li> -->
+                                </ul>
+                            </div>
+                            <div class="view-option">
+                                <a{if $filter_author=='me'} class="active"{/if} href="{$_URL}/member/layer?filter_sort={$filter_sort}&amp;filter_author={if $filter_author=='me'}all{else}me{/if}&amp;{$complete_filter}"><span>Tampilkan Layer Saya</span> <i class="ion-checkmark"></i></a>
+                            </div>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <div class="list-layers medium clearfix">
+                                {foreach $layers as $layer}
+                                <article class="item{if $layer.mode == 'edit'} own{/if}">
+                                    <header class="thumbnail square">
+                                        <img src="{$layer.thumb}">
+                                        <div class="action">
+                                            <div class="btn-group">
+                                                <a href="{$layer.url}">Lihat Layer</a>
+                                                <!-- <a href="#">Unduh</a> -->
+                                                <!-- <a href="#">Jadikan Peta</a> -->
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <div class="content">
+                                        <h3 class="title">
+                                            <a href="{$layer.url}">{$layer.title}</a>
+                                        </h3>
+                                        <div class="author">
+                                            Diunggah oleh: <strong>{$layer.author}</strong>
+                                        </div>
+
+                                    </div>
+                                    <footer class="meta">
+                                        <div class="view">Dilihat: <span class="value">{$layer.view_count}</span> kali</div>
+                                    </footer>
+                                </article>
+                                {foreachelse}
+                                <p>Tidak ada layer.</p>
+                                {/foreach}
+                            </div>
+                        </div>
+                        <footer class="panel-footer clearfix">
+                            <div class="paging">
+                                {if $pages['prev']}
+                                <a href="{$_URL}/member/layer/{$pages['prev']}?filter_sort={$filter_sort}&amp;filter_author={$filter_author}&amp;{$complete_filter}" class="prev"><i class="ion-ios7-arrow-left"></i> Sebelumnya</a>
+                                {/if}
+                                {if $pages['next']}
+                                <a href="{$_URL}/member/layer/{$pages['next']}?filter_sort={$filter_sort}&amp;filter_author={$filter_author}&amp;{$complete_filter}" class="next">Berikutnya <i class="ion-ios7-arrow-right"></i> </a>
+                                {/if}
+                            </div>
+                        </footer>
+                    </div>
+                </section>
+
+                <aside class="secondary padding clearfix">
+                    <div class="panel">
+                        <div class="panel-content">
+                            <a href="{$_URL}/member/layer/upload" class="btn primary full">Unggah Layer</a>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <h2 class="section-title">Filter Layer</h2>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <form action="{$_URL}/member/layer/" method="get">
+                                <input type="hidden" name="filter_author" id="filter_author" value="{$filter_author}">
+                                <input type="hidden" name="filter_sort" id="filter_sort" value="{$filter_sort}">
+                                <input type="hidden" name="filter_vector" id="filter_vector" value="{$filter_vector}">
+                                <input type="hidden" name="filter_raster" id="filter_raster" value="{$filter_raster}">
+
+                                <input type="hidden" name="filter_min_x" id="filter_min_x" value="{$filter_min_x}">
+                                <input type="hidden" name="filter_min_y" id="filter_min_y" value="{$filter_min_y}">
+                                <input type="hidden" name="filter_max_x" id="filter_max_x" value="{$filter_max_x}">
+                                <input type="hidden" name="filter_max_y" id="filter_max_y" value="{$filter_max_y}">
+
+                                <input type="hidden" name="filter_center_x" id="filter_center_x" value="{$filter_center_x}">
+                                <input type="hidden" name="filter_center_y" id="filter_center_y" value="{$filter_center_y}">
+                                <input type="hidden" name="filter_center_zoom" id="filter_center_zoom" value="{$filter_center_zoom}">
+
+                                <div class="filter-content">
+                                    <div class="mod">
+                                        <h3>Kata Kunci</h3>
+                                        <input type="text" name="filter_keyword" class="input-text">
+                                    </div>
+                                    <div class="mod">
+                                        <h3>Extent</h3>
+                                        <div id="filter-extent" class="maparea"></div>
+                                    </div>
+                                    <div class="mod">
+                                        <h3>Tipe Layer</h3>
+                                        <ul class="selection">
+                                            <li{if $filter_raster=='true'} class="checked"{/if}><a data-target="#filter_raster" href="#rasters">Rasters{if $raster_count} ({$raster_count}){/if} <i class="ion-ios7-checkmark-outline"></i></a></li>
+                                            <li{if $filter_vector=='true'} class="checked"{/if}><a data-target="#filter_vector" href="#vectors">Vectors{if $vector_count} ({$vector_count}){/if} <i class="ion-ios7-checkmark-outline"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mod">
+                                        <a href="{$_URL}/member/layer/?filter_sort={$filter_sort}&amp;filter_author={$filter_author}" class="btn default">Reset</a>
+                                        <a href="#simpan" id="filter-submit" class="btn primary">Simpan</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

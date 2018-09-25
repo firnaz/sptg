@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Clearing House Hidrometeorologi</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="{$_MODULEURL}/">
+
+        <!-- OpenLayer Styles -->
+        <link rel='stylesheet' href='{$_URL}/assets/components/openlayers3/build/ol.css'/>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{$_URL}/assets/css/member.css">
+        <link rel="stylesheet" href="{$_URL}/assets/css/peta.css">
+
+        <!-- Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body class="home">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="clearfix">
+                <h1 class="title">Clearing House Hidrometeorologi</h1>
+                <nav class="main-nav">
+                    <ul>
+                        <li{if $page_id=='dashboard'} class="current"{/if}><a href="{$_URL}/member"><i class="ion-home"></i> Dashboard</a></li>
+                        <li{if $page_id=='layer'} class="current"{/if}><a href="{$_URL}/member/layer"><i class="ion-android-stair-drawer"></i> Layer</a></li>
+                        <li{if $page_id=='peta'} class="current"{/if}><a href="{$_URL}/member/peta"><i class="ion-android-earth"></i> Peta</a></li>
+                        <li{if $page_id=='dokumen'} class="current"{/if}><a href="{$_URL}/member/dokumen"><i class="ion-ios7-folder"></i> Dokumen</a></li>
+                        <!--
+                        <li><a href="pencarian.html">Pencarian</a></li>
+                        <li><a href="profil.html"><i class="ion-person"></i></a></li>
+                    -->
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <!--  //HEADER -->
+
+        <div class="navbar">
+            <div class="left">
+                <h1 class="page-title">{$page_id}</h1>
+            </div>
+            <div class="right">
+                <!--
+                <form action="#" method="post" class="quicksearch">
+                    <input type="text" name="keyword" placeholder="Pencarian">
+                </form>
+                -->
+                <nav class="pref-nav">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="ion-person"></i></a>
+                            <ul class="subnav" style="display: none;">
+                                <li><a href="{$_URL}/member/logout">Logout</a></li>
+                                <li><a href="{$_URL}/member/profil">Profil</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--  //NAVBAR -->

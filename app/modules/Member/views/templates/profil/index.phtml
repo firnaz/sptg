@@ -1,0 +1,105 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <h2 class="detail-title">{$member.username}</h2>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <form action="{$_URL}/member/profil" method='post' class="general-form">
+                                <!-- <p>
+                                    <label>Email</label>
+                                    <input type="text" name="email" class="input-text" value="{$member.email}">
+                                </p> -->
+                                <p>
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" name="nama" class="input-text" value="{$member.name}">
+                                </p>
+                                <p>
+                                    <label>Password</label>
+                                    <input type="password" name="password" class="input-text">
+                                </p>
+                                <p>
+                                    <label>Nama Instansi</label>
+                                    <input type="text" name="instansi" class="input-text" value="{$member.nama_instansi}">
+                                </p>
+                                <p>
+                                    <label>Alamat Instansi</label>
+                                    <input type="text" name="alamat" class="input-text" value="{$member.alamat_instansi}">
+                                </p>
+                                <p>
+                                    <label>Jenis Kelamin</label>
+                                    <span class="select-options">
+                                        <select name="jenis_kelamin">
+                                            <option value="l" {if $member.jenis_kelamin=="l"}selected{/if}>Laki-laki</option>
+                                            <option value="p" {if $member.jenis_kelamin=="p"}selected{/if}>Perempuan</option>
+                                        </select>
+                                        <i class="arrow ion-chevron-down"></i>
+                                    </span>
+                                </p>
+                                <!-- <p>
+                                    <label>Foto</label>
+                                    <span class="avatar">
+                                        <input type="file" name="file" accept=".zip" multiple>
+                                    </span>
+                                </p> -->
+                                <p class="action">
+                                    <!-- <button class="btn">Batal</button> -->
+                                    <input type="hidden" name="submit" value="1">
+                                    <button type="submit" class="btn primary" value="1">Simpan</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="secondary padding clearfix">
+                    <div class="panel">
+                        <div class="panel-header clearfix">
+                            <h2 class="section-title">Layer Saya</h2>
+                        </div>
+                        <div class="panel-content">
+                            <ul class="list-layers small clearfix">
+                                {foreach $layers as $layer}
+                                <li class="item">
+                                    <h3 class="title">
+                                        <a href="{$layer.url}">{$layer.title}</a>
+                                    </h3>
+                                    <footer class="meta">
+                                        <div class="view">Dilihat: <span class="value">{$layer.view_count}</span> kali</div>
+                                    </footer>
+                                </li>
+                                {foreachelse}
+                                <p>Tidak ada layer</p>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header clearfix">
+                            <h2 class="section-title">Peta Saya</h2>
+                        </div>
+                        <div class="panel-content">
+                            <ul class="list-peta small clearfix">
+                                {foreach $maps as $layer}
+                                <li class="item">
+                                    <h3 class="title">
+                                        <a href="{$layer.url}">{$layer.title}</a>
+                                    </h3>
+                                    <footer class="meta">
+                                        <div class="view">Dilihat: <span class="value">{$layer.view_count}</span> kali</div>
+                                    </footer>
+                                </li>
+                                {foreachelse}
+                                <p>Tidak ada peta</p>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

@@ -1,0 +1,30 @@
+{include file="header.phtml"}
+    <div class="main-container">
+        <div class="main clearfix">
+            <div id="zmap" class="exploremap">
+                <div class="map-info">
+                    <div class="header">
+                        <a href="#" class="btn-close"><i class="ion-ios7-close-empty"></i></a>
+                    </div>
+                    <div class="content">
+                        <div class="basic-info">
+                            <h1 class="info-title">{$map_data.title}</h1>
+                            <div class="info-description">
+                                {$map_data.abstract}
+                            </div>
+                            <div class="info-meta">
+                                <div class="author">Pembuat: {$map_data.contributor}</div>
+                                <div class="view">Dilihat: <span class="value">{$map_data.num_view}</span> kali</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  //MAIN -->
+<script type="text/javascript">
+    var map_data = {$map_data|@json_encode};
+</script>
+
+{include file="footer.phtml"}

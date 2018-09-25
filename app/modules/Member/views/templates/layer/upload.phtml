@@ -1,0 +1,67 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+
+
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <h2 class="detail-title">Unggah Layer</h2>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <div class="upload">
+                                <form action="{$_URL}/member/layer/upload" method="post" enctype='multipart/form-data' class="general-form">
+                                    {*<p class="alert success">Well done! You successfully read this important alert message.</p>
+                                    <p class="alert info">Heads up! This alert needs your attention, but it is not super important.</p>
+                                    <p class="alert warning">Warning! Best check yo self, you're not looking too good.</p>
+                                    <p class="alert danger">Oh snap! Change a few things up and try submitting again.</p>*}
+                                    <p>
+                                        <label>Judul</label>
+                                        <input type="text" name="judul" class="input-text">
+                                    </p>
+                                    <p>
+                                        <label>Abstrak</label>
+                                        <textarea name="abstract" class="input-text" rows="5"></textarea>
+                                    </p>
+                                    <p>
+                                        <label>Kategori</label>
+                                        <span class="checkbox-group">
+                                            {foreach $categories as $cat}
+                                            <label class="checkbox">
+                                                <input name="categories[]" type="checkbox" value="{$cat.value}">
+                                                <span>{$cat.name}</span>
+                                            </label>
+                                            {/foreach}
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Tipe Layer</label>
+                                        <span class="select-options">
+                                            <select name="tipe">
+                                                <option value="raster">Raster</option>
+                                                <option value="vector">Vector</option>
+                                            </select>
+                                            <i class="arrow ion-chevron-down"></i>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Browse</label>
+                                        <input type="file" name="file" title="Pilih File" accept=".zip">
+                                    </p>
+                                    <p class="action">
+                                        <button type="submit" class="btn primary">Simpan</button>
+                                        <input type="hidden" name="submit" value="1">
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="secondary padding clearfix">
+
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

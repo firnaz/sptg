@@ -1,0 +1,46 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+
+
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <div class="view-option">
+                                <a{if $filter_author=='me'} class="active"{/if} href="{$_URL}/member/dokumen?filter_sort={$filter_sort}&amp;filter_author={if $filter_author=='me'}all{else}me{/if}"><span>Tampilkan Dokumen Saya</span> <i class="ion-checkmark"></i></a>
+                            </div>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <ul class="list-dokumen">
+                                {foreach $dokumen as $dok}
+                                <li>
+                                    <i class="ion-folder bullet"></i>
+                                    <h3 class="title"><a href="{$dok.url}">{$dok.title}</a></h3>
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                        <footer class="panel-footer clearfix">
+                            <div class="paging">
+                                {if $pages['prev']}
+                                <a href="{$_URL}/member/dokumen/{$pages['prev']}" class="prev"><i class="ion-ios7-arrow-left"></i> Sebelumnya</a>
+                                {/if}
+                                {if $pages['next']}
+                                <a href="{$_URL}/member/dokumen/{$pages['next']}" class="next">Berikutnya <i class="ion-ios7-arrow-right"></i> </a>
+                                {/if}
+                            </div>
+                        </footer>
+                    </div>
+                </section>
+
+                <aside class="secondary padding clearfix">
+                    <div class="panel">
+                        <div class="panel-content">
+                            <a href="{$_URL}/member/dokumen/upload" class="btn primary full">Unggah Dokumen</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

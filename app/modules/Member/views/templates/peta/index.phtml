@@ -1,0 +1,115 @@
+{include file="header.phtml"}
+        <div class="main-container">
+            <div class="main clearfix">
+
+
+                <section class="primary padding clearfix">
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <div class="sort dropdown">
+                                {if $filter_sort == 'terbaru'}
+                                <a href="javascript:void(0)" class="current"><span class="value">Terbaru</span> <i class="ion-ios7-arrow-down"></i></a>
+                                {elseif $filter_sort == 'terpopuler'}
+                                <a href="javascript:void(0)" class="current"><span class="value">Terpopuler</span> <i class="ion-ios7-arrow-down"></i></a>
+                                {elseif $filter_sort == 'terpilih'}
+                                <a href="javascript:void(0)" class="current"><span class="value">Terpilih</span> <i class="ion-ios7-arrow-down"></i></a>
+                                {/if }
+                                <ul class="selection">
+                                    <li{if $filter_sort == 'terbaru'} class="selected"{/if}><a href="{$_URL}/member/peta?filter_sort=terbaru&amp;filter_author={$filter_author}&amp;{$complete_filter}">Terbaru</a></li>
+                                    <li{if $filter_sort == 'terpopuler'} class="selected"{/if}><a href="{$_URL}/member/peta?filter_sort=terpopuler&amp;filter_author={$filter_author}&amp;{$complete_filter}">Terpopuler</a></li>
+                                    <!-- <li{if $filter_sort == 'terpilih'} class="selected"{/if}><a href="{$_URL}/member/peta?filter_sort=terpilih&amp;filter_author={$filter_author}&amp;{$complete_filter}">Terpilih</a></li> -->
+                                </ul>
+                            </div>
+                            <div class="view-option">
+                                <a{if $filter_author=='me'} class="active"{/if} href="{$_URL}/member/peta?filter_sort={$filter_sort}&amp;filter_author={if $filter_author=='me'}all{else}me{/if}&amp;{$complete_filter}"><span>Tampilkan Peta Saya</span> <i class="ion-checkmark"></i></a>
+                            </div>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <div class="list-peta medium clearfix">
+                                {foreach $maps as $map}
+                                <article class="item{if $map.mode == 'edit'} own{/if}">
+                                    <header class="title">
+                                        <div class="author">
+                                            Pembuat: <strong>{$map.author}</strong>
+                                        </div>
+                                        <h3>
+                                            <a href="{$map.url}">{$map.title}.</a>
+                                        </h3>
+
+                                    </header>
+
+                                    <div class="content">
+                                        <div class="thumbnail">
+                                            <a href="{$map.url}"><img src="{$map.thumb}"></a>
+                                        </div>
+                                        <footer class="meta">
+                                            <div class="view">Dilihat: <span class="value">{$map.view_count}</span> kali</div>
+                                        </footer>
+                                    </div>
+                                </article>
+                                {foreachelse}
+                                <p>Tidak ada peta.</p>
+                                {/foreach}
+                            </div>
+                        </div>
+                        <footer class="panel-footer clearfix">
+                            <div class="paging">
+                                {if $pages['prev']}
+                                <a href="{$_URL}/member/peta/{$pages['prev']}?filter_sort={$filter_sort}&amp;filter_author={$filter_author}&amp;{$complete_filter}" class="prev"><i class="ion-ios7-arrow-left"></i> Sebelumnya</a>
+                                {/if}
+                                {if $pages['next']}
+                                <a href="{$_URL}/member/peta/{$pages['next']}?filter_sort={$filter_sort}&amp;filter_author={$filter_author}&amp;{$complete_filter}" class="next">Berikutnya <i class="ion-ios7-arrow-right"></i> </a>
+                                {/if}
+                            </div>
+                        </footer>
+                    </div>
+                </section>
+
+                <aside class="secondary padding clearfix">
+                    <div class="panel">
+                        <div class="panel-content">
+                            <a href="{$_URL}/member/peta/upload" class="btn primary full">Buat Peta</a>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <header class="panel-header clearfix">
+                            <h2 class="section-title">Filter Peta</h2>
+                        </header>
+                        <div class="panel-content clearfix">
+                            <form action="{$_URL}/member/peta/" method="get">
+                                <input type="hidden" name="filter_author" id="filter_author" value="{$filter_author}">
+                                <input type="hidden" name="filter_sort" id="filter_sort" value="{$filter_sort}">
+
+                                <input type="hidden" name="filter_min_x" id="filter_min_x" value="{$filter_min_x}">
+                                <input type="hidden" name="filter_min_y" id="filter_min_y" value="{$filter_min_y}">
+                                <input type="hidden" name="filter_max_x" id="filter_max_x" value="{$filter_max_x}">
+                                <input type="hidden" name="filter_max_y" id="filter_max_y" value="{$filter_max_y}">
+
+                                <input type="hidden" name="filter_center_x" id="filter_center_x" value="{$filter_center_x}">
+                                <input type="hidden" name="filter_center_y" id="filter_center_y" value="{$filter_center_y}">
+                                <input type="hidden" name="filter_center_zoom" id="filter_center_zoom" value="{$filter_center_zoom}">
+
+                                <div class="filter-content">
+                                    <div class="mod">
+                                        <h3>Kata Kunci</h3>
+                                        <input type="text" name="filter_keyword" class="input-text">
+                                    </div>
+                                    <div class="mod">
+                                        <h3>Extent</h3>
+                                        <div id="filter-extent" class="maparea"></div>
+                                    </div>
+                                    <div class="mod">
+                                        <a href="{$_URL}/member/peta/?filter_sort={$filter_sort}&amp;filter_author={$filter_author}" class="btn default">Reset</a>
+                                        <a href="#simpan" id="filter-submit" class="btn primary">Simpan</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </aside>
+            </div>
+        </div>
+        <!--  //MAIN -->
+{include file="footer.phtml"}

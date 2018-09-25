@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Clearing House Hidrometeorologi</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{$_URL}/assets/css/member.css">
+
+        <!-- Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body class="login">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <form action="{$_URL}/member/login" method="post">
+            <h1 class="title">Clearing House Hidrometeorologi</h1>
+            {if $message}
+            <p class="alert danger">{$message}.</p>
+            {/if}
+            <p>
+                <label>Username</label> <br>
+                <input type="text" name="username" class="input-text">
+            </p>
+            <p>
+                <label>Password</label> <br>
+                <input type="password" name="password" class="input-text">
+            </p>
+            <p>
+                <button type="submit" class="btn full primary">Masuk</button>
+            </p>
+        </form>
+
+    </body>
+</html>
